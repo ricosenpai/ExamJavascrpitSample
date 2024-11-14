@@ -309,7 +309,242 @@ Which assertion accurately tests the above code?`,
             { text: "1 method for both", correct: false },
             { text: "1000 for Option A, 1 for Option B", correct: true }
         ]
-    }
+    },
+        {
+            question: `
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang="en"&gt;
+            &lt;table onclick="console.log('Table log');"&gt;
+                &lt;tr id="row1"&gt;
+                    &lt;td&gt;Click me!&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+            &lt;script&gt;
+                function printMessage(event){
+                    console.log('Row log');
+                    event.stopPropagation();
+                }
+                let elem = document.getElementById('row');
+                elem.addEventListener(('click', printMessage, false))
+            &lt;/script&gt;
+            &lt;/html&gt;
+
+            Which code change should be done for the console to log the following when 'Click me!' is clicked?
+            &gt; Row log
+            &gt; Table log`,
+            answers: [
+                { text: "Change line 14 to elem.addEventListener('click', printMessage, true);", correct: false },
+                { text: "Remove line 10", correct: true },
+                { text: "Remove lines 13 and 14", correct: false },
+                { text: "Change line 10 to event.stopPropagation(false);", correct: false }
+            ]
+        },
+        {
+            question: `Refer to the code:
+        
+        function Animal(size,type){
+            this.size = size || "small";
+            this.type = type || "Animal";
+            this.canTalk = false;
+        }
+        let Pet = function(size,type,name,owner){
+            Animal.call(this,size,type);
+            this.name = name;
+            this.owner = owner;
+        }
+        Pet.prototype = Object.create(Animal.prototype);
+        let pet1 = new Pet();
+        console.log("Rico :: "+pet1.name);
+        
+        Given the code above, which three properties are set on pet1?`,
+            answers: [
+                { text: "Owner", correct: false },
+                { text: "Name", correct: false },
+                { text: "Type", correct: true },
+                { text: "Size", correct: true },
+                { text: "canTalk", correct: true }
+            ]
+        },
+        {
+            question: `Refer to the code:
+        
+        class Post {
+            // Insert code here
+            constructor(body, author, viewCount) {
+                this.body = body;
+                this.author = author;
+                this.viewCount = viewCount;
+            }
+        }
+        
+        let post1 = new Post("This is the body of the blog post", "Jane Doe", 100);
+        
+        console.log(post1);
+        
+        Given the code above, which statement should be inserted in the placeholder on line 02 to allow for a variable to be set to a new instance of Post with the three attributes correctly populated?`,
+            answers: [
+                { text: "constructor() {", correct: false },
+                { text: "super(body, author, viewCount) {", correct: false },
+                { text: "constructor (body, author, viewCount) {", correct: true },
+                { text: "Function Post (body, author, viewCount) {", correct: false }
+            ]
+        },
+        {
+            question: `bar, awesome is a popular JavaScript module. the versions publish to npm are:
+            1.2
+            1.3.1
+            1.3.5
+            1.4.0
+
+            Teams at Universal Containers use this module in a number of projects. A particular project has thepackage, json definition below.
+            {
+                "name": "UC Project Extra",
+                "version": "0.0.5",
+                "dependencies": {
+                    "bar.awesome": "~1.3.0"
+                }
+            }
+            A developer runs this command: npm install.
+            Which version of bar.awesome is installed?`,
+            answers: [
+                { text: "The command fails, because version 1.3.0 is not found", correct: false },
+                { text: "1.3.5", correct: true },
+                { text: "1.3.1", correct: false },
+                { text: "1.4.0", correct: false }
+            ]
+        },
+        {
+            question: `Refer to the code below:
+        
+            let str = 'javascript';
+            str[0] = 'J';
+            str[4] = 'S';
+        
+            After attempting to change the string index values, the value of str is still 'javascript'. What is the reason for this behavior?`,
+            answers: [
+                { text: "Primitive values are immutable.", correct: true },
+                { text: "Non-primitive values are mutable.", correct: false },
+                { text: "Primitive values are mutable.", correct: false },
+                { text: "Non-primitive values are immutable.", correct: false }
+            ]
+        },
+        {
+            question: `The developer wants to test the array shown:
+        
+            const arr = Array(5).fill(0);
+        
+            Which two tests are the most accurate for this array? Choose 2 answers:`,
+            answers: [
+                { text: "console.assert(arr.length === 5);", correct: true },
+                { text: "console.assert(arr[0] === 0 && arr[arr.length] === 0);", correct: false },
+                { text: "arr.forEach(elem => console.assert(elem === 0));", correct: true },
+                { text: "console.assert(arr.length > 0);", correct: false }
+            ]
+        },
+        {
+            question: `Refer to the code below:
+        
+            function myFunction(reassign) {
+                let x = 1;
+                var y = 1;
+                if (reassign) {
+                    let x = 2;
+                    var y = 2;
+                    console.log(x);
+                    console.log(y);
+                }
+                console.log(x);
+                console.log(y);
+            }
+        
+            What is displayed when myFunction(true) is called?`,
+            answers: [
+                { text: "2 2 1 1", correct: false },
+                { text: "2 2 2 2", correct: false },
+                { text: "2 2 1 2", correct: true },
+                { text: "2 2 undefined undefined", correct: false }
+            ]
+        },
+        {
+            question: `A developer publishes a new version of a package with new features that do not break backward compatibility. The previous version number was 1.1.3. Following semantic versioning format, what should the new package version number be?`,
+            answers: [
+                { text: "1.2.3", correct: false },
+                { text: "2.0.0", correct: false },
+                { text: "1.2.0", correct: true },
+                { text: "1.1.4", correct: false }
+            ]
+        },
+        {
+            question: `Refer to the code below:
+        
+            x = 3.14;
+        
+            function myFunction() {
+                "use strict";
+                y = x;
+            }
+        
+            z = x;
+        
+            myFunction();
+        
+            What is the result of the code?`,
+            answers: [
+                { text: "z is equal to 3.14", correct: true },
+                { text: "use strict has effect only on line 5", correct: false },
+                { text: "Line 5 throws an error", correct: false },
+                { text: "test", correct: false }
+            ]
+        },
+        {
+            question: `Refer to the code below:
+        
+            let total = 10;
+            const interval = setInterval(() => {
+                total++;
+                clearInterval(interval);
+                total++;
+            }, 0);
+            total++;
+            console.log(total);
+        
+            Considering that JavaScript is single-threaded, what is the output of line 08 after the code executes?`,
+            answers: [
+                { text: "10", correct: false },
+                { text: "12", correct: false },
+                { text: "11", correct: true },
+                { text: "13", correct: false }
+            ]
+        },
+        {
+            question: `Refer to the code below:
+        
+            let foodMenu1 = ['pizza', 'burger', 'French fries'];
+            let finalMenu = foodMenu1;
+            finalMenu.push('Garlic bread');
+        
+            What is the value of foodMenu1 after the code executes?`,
+            answers: [
+                { text: "[ 'pizza', 'burger', 'French fries', 'Garlic bread' ]", correct: true },
+                { text: "[ 'Garlic bread' ]", correct: false },
+                { text: "[ 'pizza', 'burger', 'French fries' ]", correct: false },
+                { text: "[ 'Garlic bread', 'pizza', 'burger', 'French fries' ]", correct: false }
+            ]
+        },
+        {
+            question: `Refer to the following array:
+        
+            let arr = [1, 2, 3, 4, 5];
+        
+            Which three options result in x evaluating as [3, 4, 5]? Choose 3 answers.`,
+            answers: [
+                { text: "let x = arr.filter((a) => { return a > 2 });", correct: true },
+                { text: "let x = arr.filter((a) => { a < 2 });", correct: false },
+                { text: "let x = arr.slice(2);", correct: true },
+                { text: "let x = arr.splice(2, 3);", correct: true },
+                { text: "let x = arr.slice(2, 3);", correct: false }
+            ]
+        }          
 ];
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
@@ -450,7 +685,19 @@ function selectAnswer(e) {
     const selectedAnswers = Array.from(answerButtons.children).filter(button => button.classList.contains('selected'));
     const selectedCorrectAnswers = Array.from(answerButtons.children).filter(button => button.classList.contains('selected') && button.dataset.correct === "true");
 
-    if(selectedAnswers.length == 2){
+    if(selectedAnswers.length == 3 && correctAnswers.length == 3){
+        //nextButton.style.display = "block";//comment this out to directly next the question
+            // If all correct answers are selected, enable the "Next" button
+        if (correctAnswers.length === selectedCorrectAnswers.length) {
+            score++;
+        }
+        Array.from(answerButtons.children).forEach(button => {
+            button.disabled = true;
+        });
+        setTimeout(function() {
+            handledNextButton();//put this to directly next the question
+        }, 1000);
+    }else if(selectedAnswers.length == 2 && correctAnswers.length == 2){
         //nextButton.style.display = "block";//comment this out to directly next the question
             // If all correct answers are selected, enable the "Next" button
         if (correctAnswers.length === selectedCorrectAnswers.length) {
